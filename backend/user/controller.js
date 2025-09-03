@@ -1,24 +1,32 @@
 import { JSONFilePreset } from "lowdb/node";
 import { RegisterModel } from "./model.js";
+import argon2 from "argon2";
+import { v4 as uuidv4 } from "uuid";
 
-const db = await JSONFilePreset('db.json', { users: [] });
+const db = await JSONFilePreset("db.json", { users: [] });
 
 class UserController {
   async createUser(req, res) {
-
     try {
-        const {error, value } = RegisterModel.validate(req.body);
+      const { error, value } = RegisterModel.validate(req.body);
 
-        if (error)
-            throw error;
+      if (error) throw error;
 
-        await db.update(({users}) => users.push(value));
+      const hash = await argon2.hash(value.password);
+      const newUser = {
+        id: uuidv4(),
+        name: value.name,
+        email: value.email,
+        password: hash,
+        status: "pending",
+      };
 
-        res.status(200).send(db.data.users[db.data.users.length - 1]);
-    }
-    catch(e) {
-        console.log(e);
-        res.status(500).send("error");
+      await db.update(({ users }) => users.push(newUser));
+
+      res.status(200).send(db.data.users[db.data.users.length - 1]);
+    } catch (e) {
+      console.log(e);
+      res.status(500).send("error");
     }
   }
 

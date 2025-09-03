@@ -19,12 +19,14 @@
   },
   "homepage": "https://github.com/lfourage/TP-Back-end-avec-Nodemailer#readme",
   "dependencies": {
+    "argon2": "^0.44.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "joi": "^18.0.1",
     "lowdb": "^7.0.1",
     "multer": "^2.0.2",
     "nodemailer": "^7.0.6",
-    "react": "^19.1.1"
+    "react": "^19.1.1",
+    "uuid": "^11.1.0"
   }
 }
