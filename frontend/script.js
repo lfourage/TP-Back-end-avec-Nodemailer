@@ -4,7 +4,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   const formData = new FormData(form);
   document.getElementById('contactMsg').textContent = '';
   try {
-    const res = await fetch('/user/contact', {
+    const res = await fetch('/contact', {
       method: 'POST',
       body: formData
     });
@@ -30,7 +30,7 @@ registerForm.addEventListener('submit', async function(e) {
   };
   document.getElementById('registerMsg').textContent = '';
   try {
-    const res = await fetch('/user/register', {
+    const res = await fetch('/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -56,7 +56,7 @@ loginForm.addEventListener('submit', async function(e) {
   };
   document.getElementById('loginMsg').textContent = '';
   try {
-    const res = await fetch('/user/login', {
+    const res = await fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -81,7 +81,7 @@ resetRequestForm.addEventListener('submit', async function(e) {
   };
   document.getElementById('resetRequestMsg').textContent = '';
   try {
-    const res = await fetch('/user/password-reset-request', {
+    const res = await fetch('/password-reset-request', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -107,7 +107,7 @@ resetForm.addEventListener('submit', async function(e) {
   };
   document.getElementById('resetMsg').textContent = '';
   try {
-    const res = await fetch(`/user/reset-password/${token}`, {
+    const res = await fetch(`/reset-password/${token}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
